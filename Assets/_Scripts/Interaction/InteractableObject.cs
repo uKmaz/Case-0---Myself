@@ -11,12 +11,15 @@ public enum InteractionMethod
 public class InteractableObject : MonoBehaviour
 {
     [Header("--- HİKAYE AYARLARI ---")]
+    public bool alwaysActive = false;
     public StoryStep activeStep;
     public StoryStep nextStep;
+    
 
     [Header("--- ETKİLEŞİM TÜRÜ ---")]
     [Tooltip("Zone: İçinden geçince çalışır. Key: F tuşu ister.")]
     public InteractionMethod interactMethod; 
+    
 
     [Header("--- İÇERİK ---")]
     public DialogueData dialogue;
@@ -73,6 +76,10 @@ public class InteractableObject : MonoBehaviour
         if (other.CompareTag("Player") && isInteractable)
         {
             isPlayerInRange = true;
+            if (InteractionPromptUI.Instance != null)
+            {
+                InteractionPromptUI.Instance.Show(this.transform);
+            }
             if (interactMethod == InteractionMethod.Zone_Enter_Auto)
             {
                 Interact();
@@ -85,6 +92,10 @@ public class InteractableObject : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerInRange = false;
+            if (InteractionPromptUI.Instance != null)
+            {
+                InteractionPromptUI.Instance.Hide();
+            }
         }
     }
 
@@ -120,5 +131,7 @@ public class InteractableObject : MonoBehaviour
         
         // 4. Görseli kapat
         if (visualCueObject != null) visualCueObject.SetActive(false);
+        
+        if (InteractionPromptUI.Instance != null) InteractionPromptUI.Instance.Hide();
     }
 }

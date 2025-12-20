@@ -15,6 +15,8 @@ MonoBehaviour:
   textFile: {fileID: 0}
   conversation:
   - speakerName: Emre
-    sentence: Selam
+    sentence: "Selam yavrum ben akvayrum. Nas\u0131ls\u0131n? \u0130yi misin bug\xFCn.
+      Okulda hi\xE7 iyi de\u011Fildin :)\n?.-_\u015F\xE7i\xF6\u011F"
   - speakerName: Nisa
-    sentence: AAAAAAAUUUUUUUUUUUUUUUUUU
+    sentence: "KES LAN YARRAM. OKULDA GHOSTLADIN BEN\u0130 ERASMUSTAN GELD\u0130\u011E\u0130NDEN
+      BER\u0130 SURATIMA B\u0130LE BAKMIYORSUN. SANA A\u015EKIMDAN \xD6L\xDCYORUM."
