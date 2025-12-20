@@ -14,9 +14,21 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        // Eğer diyalog varsa hareketi durdurabilirsin (İstersen burayı aktif et)
-        // if (DialogueManager.Instance.IsDialogueActive) { rb.velocity = Vector2.zero; return; }
-
+        // 1. DİYALOG KONTROLÜ
+        if (DialogueManager.Instance != null && DialogueManager.Instance.IsDialogueActive)
+        {
+            // KRİTİK NOKTA: Hareket vektörünü sıfırla ki FixedUpdate yanlış hatırlamasın
+            movement = Vector2.zero; 
+            
+            // Fiziği durdur
+            rb.linearVelocity = Vector2.zero; 
+            
+            // Animasyonu durdur
+            if(animator) animator.SetFloat("Speed", 0); 
+            
+            return; // Buradan çık, aşağıya inip input okuma
+        }
+        
         // Girişleri al (A/D veya Sol/Sağ Ok)
         movement.x = Input.GetAxisRaw("Horizontal");
 
@@ -30,10 +42,17 @@ public class PlayerController : MonoBehaviour
         if (movement.x > 0 && !facingRight) Flip();
         else if (movement.x < 0 && facingRight) Flip();
     }
-
+    
     void FixedUpdate()
     {
-        // Fiziksel hareket
+        // İkinci bir güvenlik önlemi: Diyalog varsa fizikte de güç uygulama
+        if (DialogueManager.Instance != null && DialogueManager.Instance.IsDialogueActive)
+        {
+            rb.linearVelocity = Vector2.zero;
+            return;
+        }
+
+        // Normal Hareket
         rb.linearVelocity = new Vector2(movement.x * moveSpeed, rb.linearVelocity.y);
     }
 

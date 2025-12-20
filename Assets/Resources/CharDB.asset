@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c48764a8b9094aa4d92b8f93973d41d7, type: 3}
+  m_Name: CharDB
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterDatabase
+  characters:
+  - characterId: Emre
+    portrait: {fileID: -2413806693520163455, guid: c4ff44f4743a4cb41a29f9f5425c2205, type: 3}
+  - characterId: Nisa
+    portrait: {fileID: -2413806693520163455, guid: c4ff44f4743a4cb41a29f9f5425c2205, type: 3}
+  - characterId: Bilinmeyen
+    portrait: {fileID: -2413806693520163455, guid: c4ff44f4743a4cb41a29f9f5425c2205, type: 3}
+  - characterId: "D\u0131\u015F Ses"
+    portrait: {fileID: -2413806693520163455, guid: c4ff44f4743a4cb41a29f9f5425c2205, type: 3}
+  - characterId: "\u0130\xE7 Ses"
+    portrait: {fileID: -2413806693520163455, guid: c4ff44f4743a4cb41a29f9f5425c2205, type: 3}

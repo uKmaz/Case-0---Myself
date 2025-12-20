@@ -22,6 +22,8 @@ public class StoryEventManager : MonoBehaviour
             // 1. Abonelik başlat (Gelecek değişiklikler için)
             GameManager.Instance.OnStoryStepChanged += CheckEvents;
             
+            CheckEvents(GameManager.Instance.currentStep);
+            
         }
     }
 
