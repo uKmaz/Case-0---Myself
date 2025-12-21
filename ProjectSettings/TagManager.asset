@@ -50,5 +50,14 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Dedective
+    uniqueID: 3410645493
+    locked: 0
+  - name: MostFront
+    uniqueID: 1215230003
+    locked: 0
+  - name: Blackout
+    uniqueID: 3587153963
+    locked: 0
   m_RenderingLayers:
   - Default

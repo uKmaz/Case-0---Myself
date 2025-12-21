@@ -1,37 +1,45 @@
 using UnityEngine;
-using UnityEngine.Events; // UnityEvent için gerekli
+using UnityEngine.Events;
+using System.Collections.Generic; // List için gerekli
 
-// Seçim yapacağımız ENUM
 public enum InteractionMethod
 {
-    Key_Press_F,     // Yanına gelip F'ye basınca
-    Zone_Enter_Auto  // İçine girince otomatik
+    Key_Press_F,
+    Zone_Enter_Auto
 }
 
 public class InteractableObject : MonoBehaviour
 {
-    [Header("--- HİKAYE AYARLARI ---")]
+    // --- ÖZEL DURUM TANIMI (STRUCT) ---
+    // Inspector'da liste elemanı olarak görünecek kutucuk yapısı
+    [System.Serializable]
+    public struct StateScenario
+    {
+        public string scenarioName;      // Karışmasın diye isim (Örn: "Sabah Durumu")
+        public StoryStep requiredStep;   // Hangi adımda çalışacak?
+        public StoryStep nextStep;       // Bitince hangi adıma geçecek?
+        public DialogueData dialogue;    // Hangi diyaloğu okuyacak?
+        public UnityEvent onInteract;    // Ne yapacak? (Örn: Kolye sprite'ını aç)
+    }
+
+    [Header("--- GENEL AYARLAR ---")]
+    [Tooltip("İşaretlenirse, özel bir state bulunamasa bile obje çalışır (Navigation modu).")]
     public bool alwaysActive = false;
-    public StoryStep activeStep;
-    public StoryStep nextStep;
-    
+
 
     [Header("--- ETKİLEŞİM TÜRÜ ---")]
-    [Tooltip("Zone: İçinden geçince çalışır. Key: F tuşu ister.")]
-    public InteractionMethod interactMethod; 
-    
-
-    [Header("--- İÇERİK ---")]
-    public DialogueData dialogue;
+    public InteractionMethod interactMethod;
 
     [Header("--- GÖRSEL ---")]
-    [Tooltip("Adım aktif olduğunda UZAKTAN DA GÖRÜNECEK obje.")]
-    public GameObject visualCueObject; 
+    public GameObject visualCueObject;
 
-    // --- YENİ EKLENEN KISIM ---
-    [Header("--- ÖZEL AKSİYONLAR ---")]
-    [Tooltip("F Tuşuna basıldığı (veya etkileşim olduğu) AN yapılacaklar.")]
-    public UnityEvent onInteract; 
+    // --- YENİ LİSTE SİSTEMİ ---
+    [Header("--- SENARYOLAR (Özel Durumlar) ---")]
+    public List<StateScenario> specificStates; 
+
+    [Header("--- VARSAYILAN AKSİYON (Fallback) ---")]
+    [Tooltip("Eğer Always Active ise ve yukarıdaki hiçbir State uymuyorsa burası çalışır (Örn: Sadece Işınlanma).")]
+    public UnityEvent defaultOnInteract;
     // ---------------------------
 
     private bool isInteractable = false;
@@ -65,7 +73,6 @@ public class InteractableObject : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
-                Debug.Log("BAŞARILI! Etkileşim Başlıyor...");
                 Interact();
             }
         }
@@ -76,14 +83,9 @@ public class InteractableObject : MonoBehaviour
         if (other.CompareTag("Player") && isInteractable)
         {
             isPlayerInRange = true;
-            if (InteractionPromptUI.Instance != null)
-            {
-                InteractionPromptUI.Instance.Show(this.transform);
-            }
-            if (interactMethod == InteractionMethod.Zone_Enter_Auto)
-            {
-                Interact();
-            }
+            if (InteractionPromptUI.Instance != null) InteractionPromptUI.Instance.Show(this.transform);
+            
+            if (interactMethod == InteractionMethod.Zone_Enter_Auto) Interact();
         }
     }
 
@@ -92,45 +94,82 @@ public class InteractableObject : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerInRange = false;
-            if (InteractionPromptUI.Instance != null)
-            {
-                InteractionPromptUI.Instance.Hide();
-            }
+            if (InteractionPromptUI.Instance != null) InteractionPromptUI.Instance.Hide();
         }
     }
 
-    private void CheckVisibility(StoryStep currentStoryStep)
+    // --- GÖRÜNÜRLÜK KONTROLÜ (GÜNCELLENDİ) ---
+    private void CheckVisibility(StoryStep currentStep)
     {
-        if (currentStoryStep == activeStep)
+        bool specialStateFound = false;
+
+        // 1. Önce listede bu adım var mı diye bak
+        foreach (var scenario in specificStates)
         {
+            if (scenario.requiredStep == currentStep)
+            {
+                specialStateFound = true;
+                break;
+            }
+        }
+
+        if (specialStateFound)
+        {
+            // DURUM 1: ÖZEL HİKAYE ANI
+            // Hem etkileşim açık, hem de Visual Cue (Parlama) açık.
             isInteractable = true;
             if (myCollider != null) myCollider.enabled = true;
             if (visualCueObject != null) visualCueObject.SetActive(true);
         }
+        else if (alwaysActive)
+        {
+            // DURUM 2: NAVİGASYON MODU (Always Active)
+            // Etkileşim açık AMA Visual Cue KAPALI.
+            isInteractable = true;
+            if (myCollider != null) myCollider.enabled = true;
+            if (visualCueObject != null) visualCueObject.SetActive(false); // <-- Fark burada
+        }
         else
         {
+            // DURUM 3: PASİF
             isInteractable = false;
             isPlayerInRange = false; 
             if (myCollider != null) myCollider.enabled = false;
             if (visualCueObject != null) visualCueObject.SetActive(false);
         }
     }
-
+    // --- ETKİLEŞİM MANTIĞI (GÜNCELLENDİ) ---
     public void Interact()
     {
-        // 1. Önce Diyalog (Varsa)
-        if (dialogue != null) DialogueManager.Instance.StartDialogue(dialogue);
+        StoryStep currentStep = GameManager.Instance.currentStep;
+        bool matchFound = false;
 
-        // --- 2. YENİ: Özel Aksiyonları Çalıştır ---
-        // Buraya Inspector'dan eklediğin her şey (Animasyon, Ses vs.) burada çalışır.
-        onInteract.Invoke(); 
-        // -----------------------------------------
+        // 1. Özel Senaryo Kontrolü
+        foreach (var scenario in specificStates)
+        {
+            if (scenario.requiredStep == currentStep)
+            {
+                matchFound = true;
+                
+                if (scenario.dialogue != null) DialogueManager.Instance.StartDialogue(scenario.dialogue);
+                
+                scenario.onInteract.Invoke();
 
-        // 3. En son State'i değiştir (Çünkü State değişince obje kendini kapatabilir)
-        if (activeStep != nextStep) GameManager.Instance.UpdateStoryStep(nextStep);
-        
-        // 4. Görseli kapat
-        if (visualCueObject != null) visualCueObject.SetActive(false);
+                if (scenario.nextStep != currentStep) 
+                {
+                    GameManager.Instance.UpdateStoryStep(scenario.nextStep);
+                    // State değişince CheckVisibility otomatik çalışır ve Cue kapanır.
+                }
+                break; 
+            }
+        }
+
+        // 2. Varsayılan (Navigation) Kontrolü
+        if (!matchFound && alwaysActive)
+        {
+            // Sadece ışınlanma vs. çalışır, Visual Cue zaten kapalıdır.
+            defaultOnInteract.Invoke();
+        }
         
         if (InteractionPromptUI.Instance != null) InteractionPromptUI.Instance.Hide();
     }

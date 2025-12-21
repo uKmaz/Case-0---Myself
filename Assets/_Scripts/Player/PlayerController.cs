@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -8,6 +9,7 @@ public class PlayerController : MonoBehaviour
     [Header("Bileşenler")]
     public Rigidbody2D rb;
     public Animator animator; // Animasyon varsa bağla, yoksa boş kalsın
+    public ParticleSystem faceSplashEffect;
     
     private Vector2 movement;
     private bool facingRight = true;
@@ -63,5 +65,51 @@ public class PlayerController : MonoBehaviour
         Vector3 scaler = transform.localScale;
         scaler.x *= -1; // X eksenini ters çevir
         transform.localScale = scaler;
+    }
+    
+    public void ForceWalkRight(float duration)
+    {
+        StartCoroutine(AutoWalkRoutine(duration));
+    }
+
+    private IEnumerator AutoWalkRoutine(float duration)
+    {
+        float timer = 0f;
+    
+        // Yürüme animasyonunu aç (Varsa)
+        // animator.SetBool("IsWalking", true); 
+    
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+        
+            // Karakteri sağa ittir (Transform veya Rigidbody ile)
+            transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
+        
+            yield return null;
+        }
+
+        // Yürüme animasyonunu kapat
+        // animator.SetBool("IsWalking", false);
+    }
+
+    public void faceWash()
+    {
+            // Güvenlik kontrolü
+        if (faceSplashEffect == null)
+        {
+            Debug.LogWarning("Particle System atanmamış!");
+            return;
+        }
+
+        // Eğer efekt şu an zaten oynamıyorsa çalıştır.
+        // (Art arda basınca spam olmasını engeller)
+        if (!faceSplashEffect.isPlaying)
+        {
+            Debug.Log("Yüz yıkanıyor...");
+            // Sadece Play diyoruz. Particle System ayarları gereği
+            // bir kere patlayacak ve kendi kendine duracak.
+            faceSplashEffect.Play();
+        }
     }
 }

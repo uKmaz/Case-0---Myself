@@ -30,17 +30,15 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        // 1. Önce Başlangıç ayarlarını yükle (Player gizlensin)
-        UpdateStoryStep(StoryStep.Baslangic);
-
-        // 2. Çok kısa bir süre sonra (0.1sn) hikayeyi başlat ki sistemler otursun
-        Invoke("StartTheGameDelayed", 0.1f); 
+        // ARTIK OTOMATİK BAŞLATMIYORUZ 🛑
+        // Oyun açıldığında direkt Main Menu state'ine geçiyoruz.
+        // Bu state'te player hareket edemez, sadece menü görünür.
+        UpdateStoryStep(StoryStep.Menu);
     }
 
-    private void StartTheGameDelayed()
+    public void afterBaslangic()
     {
-        // Player hala gizli ama artık Yatak etkileşime açık (F tuşu çalışır)
-        UpdateStoryStep(StoryStep.Yatak_Uyanis); 
+        UpdateStoryStep(StoryStep.Yatak_Uyanis);
     }
 
     /// <summary>
