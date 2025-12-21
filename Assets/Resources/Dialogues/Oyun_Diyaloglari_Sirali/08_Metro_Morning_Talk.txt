@@ -1,0 +1,6 @@
+Asistan:Günaydın dedektif. 
+Dedektif:Günaydın. Neler olmuş anlat hemen.
+Asistan:Kurban 35 yaşında, erkek. Dün gece iş arkadaşlarıyla bir şeyler içmiş…
+Asistan:Evine dönmek için metro beklediği sırada katilimiz gelmiş…
+Asistan:Olay gece yarısı gerçekleşmiş. Katilimiz adamı öldürmek için özellikle son metroyu beklemiş.
+Dedektif:Tamamdır Umut. Teşekkürler, bundan sonrasında ben devam ederim.

@@ -8,64 +8,86 @@ public class PlayerController : MonoBehaviour
 
     [Header("Bileşenler")]
     public Rigidbody2D rb;
-    public Animator animator; // Animasyon varsa bağla, yoksa boş kalsın
+    public Animator animator;         // Detective Sprite üzerindeki animator
+    public Animator criminalAnimator; // Criminal Sprite üzerindeki animator
     public ParticleSystem faceSplashEffect;
     
     private Vector2 movement;
-    private bool facingRight = true;
+    private bool isCinematicMode = false;
 
     void Update()
     {
+        if (isCinematicMode) return;
         // 1. DİYALOG KONTROLÜ
         if (DialogueManager.Instance != null && DialogueManager.Instance.IsDialogueActive)
         {
-            // KRİTİK NOKTA: Hareket vektörünü sıfırla ki FixedUpdate yanlış hatırlamasın
             movement = Vector2.zero; 
-            
-            // Fiziği durdur
             rb.linearVelocity = Vector2.zero; 
-            
-            // Animasyonu durdur
-            if(animator) animator.SetFloat("Speed", 0); 
-            
-            return; // Buradan çık, aşağıya inip input okuma
-        }
-        
-        // Girişleri al (A/D veya Sol/Sağ Ok)
-        movement.x = Input.GetAxisRaw("Horizontal");
 
-        // Animasyon parametresi gönder (Speed > 0 ise yürüme animasyonu)
-        if (animator != null)
+            // Hangi animator aktifse onu durdur
+            if (animator.gameObject.activeInHierarchy) animator.SetBool("IsMoving", false);
+            if (criminalAnimator.gameObject.activeInHierarchy) criminalAnimator.SetBool("IsMoving", false);
+            
+            return; 
+        }
+    
+        // 2. INPUT OKUMA
+        float moveInput = Input.GetAxisRaw("Horizontal");
+        movement = new Vector2(moveInput, 0); 
+
+        // 3. ANİMASYON KONTROLÜ
+        bool IsMoving = (moveInput != 0);
+
+        // Dedektif aktifse onun animasyonunu yönet
+        if (animator.gameObject.activeInHierarchy)
         {
-            animator.SetFloat("Speed", Mathf.Abs(movement.x));
+            animator.SetBool("IsMoving", IsMoving);
         }
 
-        // Karakteri Döndür (Flip)
-        if (movement.x > 0 && !facingRight) Flip();
-        else if (movement.x < 0 && facingRight) Flip();
+        // Criminal aktifse onun animasyonunu yönet
+        if (criminalAnimator.gameObject.activeInHierarchy)
+        {
+            criminalAnimator.SetBool("IsMoving", IsMoving);
+        }
+    
+        // 4. YÖN DÖNDÜRME
+        if (moveInput > 0) 
+        {
+            // Sağa bak
+            if (animator.gameObject.activeInHierarchy) animator.transform.localScale = Vector3.one;
+            if (criminalAnimator.gameObject.activeInHierarchy) criminalAnimator.transform.localScale = Vector3.one;
+        }
+        else if (moveInput < 0) 
+        {
+            // Sola bak
+            if (animator.gameObject.activeInHierarchy) animator.transform.localScale = new Vector3(-1, 1, 1);
+            if (criminalAnimator.gameObject.activeInHierarchy) criminalAnimator.transform.localScale = new Vector3(-1, 1, 1);
+        }
     }
     
     void FixedUpdate()
     {
-        // İkinci bir güvenlik önlemi: Diyalog varsa fizikte de güç uygulama
+        if (isCinematicMode) return;
+        
         if (DialogueManager.Instance != null && DialogueManager.Instance.IsDialogueActive)
         {
             rb.linearVelocity = Vector2.zero;
             return;
         }
 
-        // Normal Hareket
         rb.linearVelocity = new Vector2(movement.x * moveSpeed, rb.linearVelocity.y);
     }
 
-    // Karakterin yönünü değiştiren fonksiyon
+    // Bu eski fonksiyonu kullanmıyorsan silebilirsin, scale yöntemini kullanıyorsun çünkü.
+    /*
     private void Flip()
     {
         facingRight = !facingRight;
         Vector3 scaler = transform.localScale;
-        scaler.x *= -1; // X eksenini ters çevir
+        scaler.x *= -1; 
         transform.localScale = scaler;
     }
+    */
     
     public void ForceWalkRight(float duration)
     {
@@ -74,41 +96,38 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator AutoWalkRoutine(float duration)
     {
+        isCinematicMode = true;
         float timer = 0f;
-    
-        // Yürüme animasyonunu aç (Varsa)
-        // animator.SetBool("IsWalking", true); 
+        this.rb.simulated = false;
+        // Sadece aktif olan animatörü yürüt
+        if (animator.gameObject.activeInHierarchy) animator.SetBool("IsMoving", true);
+        if (criminalAnimator.gameObject.activeInHierarchy) criminalAnimator.SetBool("IsMoving", true);
     
         while (timer < duration)
         {
             timer += Time.deltaTime;
-        
-            // Karakteri sağa ittir (Transform veya Rigidbody ile)
             transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
-        
             yield return null;
         }
 
-        // Yürüme animasyonunu kapat
-        // animator.SetBool("IsWalking", false);
+        // Süre bitince yine sadece aktif olanı durdur
+        if (animator.gameObject.activeInHierarchy) animator.SetBool("IsMoving", false);
+        if (criminalAnimator.gameObject.activeInHierarchy) criminalAnimator.SetBool("IsMoving", false);
+        isCinematicMode  = false;
+        this.rb.simulated = true;
     }
 
     public void faceWash()
     {
-            // Güvenlik kontrolü
         if (faceSplashEffect == null)
         {
             Debug.LogWarning("Particle System atanmamış!");
             return;
         }
 
-        // Eğer efekt şu an zaten oynamıyorsa çalıştır.
-        // (Art arda basınca spam olmasını engeller)
         if (!faceSplashEffect.isPlaying)
         {
             Debug.Log("Yüz yıkanıyor...");
-            // Sadece Play diyoruz. Particle System ayarları gereği
-            // bir kere patlayacak ve kendi kendine duracak.
             faceSplashEffect.Play();
         }
     }

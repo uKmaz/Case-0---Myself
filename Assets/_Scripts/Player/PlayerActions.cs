@@ -71,16 +71,29 @@ public class PlayerActions : MonoBehaviour
     // Ara sahnelerde oyuncu yürüyemesin diye (True = Kilitli, False = Serbest)
     public void SetPlayerActiveState(bool isActive)
     {
-        // 1. Görüntüyü Aç/Kapa
-        var sr = GetComponent<SpriteRenderer>();
-        if (sr != null) sr.enabled = isActive;
+        // 1. GÖRÜNTÜYÜ AÇ/KAPA (Hiyerarşideki TÜM Sprite'ları bulur)
+        // GetComponentsInChildren bütün alt objeleri tarar.
+        SpriteRenderer[] allSprites = GetComponentsInChildren<SpriteRenderer>();
 
-        // 2. Kontrolü Aç/Kapa (Yürüyemesin)
-        var ctrl = GetComponent<PlayerController>();
-        if (ctrl != null) ctrl.enabled = isActive;
+        foreach (SpriteRenderer sr in allSprites)
+        {
+            sr.enabled = isActive;
+        }
 
-        // 3. Fiziksel olarak durdur (Kaymasın)
-        var rb = GetComponent<Rigidbody2D>();
-        if (rb != null && !isActive) rb.linearVelocity = Vector2.zero;
+        // 2. KONTROLÜ AÇ/KAPA
+        // "this" bu scriptin kendisidir (PlayerController)
+        this.enabled = isActive; 
+
+        // 3. FİZİKSEL OLARAK DURDUR
+        // rb zaten yukarıda tanımlıydı, tekrar GetComponent yapmaya gerek yok
+        if (rb != null && !isActive) 
+        {
+            rb.linearVelocity = Vector2.zero;
+            // İstersen tamamen fiziği kapatmak için: rb.simulated = false; diyebilirsin
+        }
+        else if (rb != null && isActive)
+        {
+            // rb.simulated = true;
+        }
     }
 }

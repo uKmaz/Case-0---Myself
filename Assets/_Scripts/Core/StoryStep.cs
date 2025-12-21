@@ -19,6 +19,7 @@ public enum StoryStep
     Sheriffle_Konus,
     Cesedi_incele,
     Odana_Don,
+    kendi_dialog,
     Uyu,
     // --- GÜN 2 --- //
     mucevheri_cal,
@@ -26,7 +27,13 @@ public enum StoryStep
     uyan,
     telefon_calis_v2,
     Telefon_ac_v2,
-    Oda_Cikis_v2, 
+    Oda_Cikis_v2,
+    Salona_gir,
+    kolyeyi_incele,
+    odadan_cik,
+    evden_cik,
+    sokaktan_kuyumcuya
+    
     
     
     
