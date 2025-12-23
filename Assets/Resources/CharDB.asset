@@ -13,13 +13,17 @@ MonoBehaviour:
   m_Name: CharDB
   m_EditorClassIdentifier: Assembly-CSharp::CharacterDatabase
   characters:
-  - characterId: Emre
-    portrait: {fileID: -2413806693520163455, guid: c4ff44f4743a4cb41a29f9f5425c2205, type: 3}
-  - characterId: Nisa
-    portrait: {fileID: -2413806693520163455, guid: c4ff44f4743a4cb41a29f9f5425c2205, type: 3}
-  - characterId: Bilinmeyen
-    portrait: {fileID: -2413806693520163455, guid: c4ff44f4743a4cb41a29f9f5425c2205, type: 3}
-  - characterId: "D\u0131\u015F Ses"
-    portrait: {fileID: -2413806693520163455, guid: c4ff44f4743a4cb41a29f9f5425c2205, type: 3}
-  - characterId: "\u0130\xE7 Ses"
-    portrait: {fileID: -2413806693520163455, guid: c4ff44f4743a4cb41a29f9f5425c2205, type: 3}
+  - characterId: "Su\xE7lu"
+    portrait: {fileID: 1165953892752866185, guid: 8bb8e739395761c4192be64c2ef72278, type: 3}
+  - characterId: Suit
+    portrait: {fileID: -5401310702821101188, guid: c29eebe24bc470a49bb9e1ba079492ed, type: 3}
+  - characterId: Dedektif
+    portrait: {fileID: 5699553202864757002, guid: 916a2196e3d3354478d8aa0120b19aa4, type: 3}
+  - characterId: Asistan
+    portrait: {fileID: 7744021956787621001, guid: c5f81ec250d63ae4197f68ab76f3b4ce, type: 3}
+  - characterId: Polis
+    portrait: {fileID: 6182475656039220053, guid: 4311600c9475f414b8b820b5fec7d7ec, type: 3}
+  - characterId: Kuyumcu
+    portrait: {fileID: 5874883098779962967, guid: cbf0c0ae838927649b8096f620a25d70, type: 3}
+  - characterId: Evsiz
+    portrait: {fileID: 4544422606153442727, guid: c1074cfd868ea544a89c796694dcd44d, type: 3}

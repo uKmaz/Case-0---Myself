@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce03b61ed0254ff78274a72ed36073fc, type: 3}
+  m_Name: 07_Metro_Morning
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueData
+  textFile: {fileID: 4900000, guid: 6d8a190997223a149bda21173bf5a48f, type: 3}
+  conversation:
+  - speakerName: Polis
+    sentence: Geciktin!
+  - speakerName: Dedektif
+    sentence: "Sana da g\xFCnayd\u0131n eski dostum."
+  - speakerName: Polis
+    sentence: "Yard\u0131mc\u0131n orda bekliyor, detaylar\u0131 ondan \xF6\u011Frenebilirsin."

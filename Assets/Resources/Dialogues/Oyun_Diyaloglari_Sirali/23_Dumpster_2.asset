@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce03b61ed0254ff78274a72ed36073fc, type: 3}
+  m_Name: 23_Dumpster_2
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueData
+  textFile: {fileID: 4900000, guid: c4fb47caeb7f18e46bb0b5ec4d99d0e2, type: 3}
+  conversation:
+  - speakerName: Asistan
+    sentence: Dedektif!
+  - speakerName: Dedektif
+    sentence: Noldu?
+  - speakerName: Asistan
+    sentence: "Bu g\xF6zl\xFCk sizin de\u011Fil mi?"
+  - speakerName: Dedektif
+    sentence: E-evet.
+  - speakerName: Asistan
+    sentence: "\u2026"
+  - speakerName: Polis
+    sentence: "\u2026"
+  - speakerName: Polis
+    sentence: KALDIR KOLLARINI.!

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce03b61ed0254ff78274a72ed36073fc, type: 3}
+  m_Name: 05_Bathroom_1
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueData
+  textFile: {fileID: 4900000, guid: bd62aeaff693a0045b0bbb9ededafc8b, type: 3}
+  conversation:
+  - speakerName: Dedektif
+    sentence: "Bu k\u0131r\u0131k aynay\u0131 art\u0131k de\u011Fi\u015Ftimeliyim."
+  - speakerName: Dedektif
+    sentence: Oh, iyi geldi.

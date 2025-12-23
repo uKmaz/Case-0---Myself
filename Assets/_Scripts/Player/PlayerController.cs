@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D rb;
     public Animator animator;         // Detective Sprite üzerindeki animator
     public Animator criminalAnimator; // Criminal Sprite üzerindeki animator
+    public Animator NoGlassAnimator;
     public ParticleSystem faceSplashEffect;
     
     private Vector2 movement;
@@ -27,6 +28,7 @@ public class PlayerController : MonoBehaviour
             // Hangi animator aktifse onu durdur
             if (animator.gameObject.activeInHierarchy) animator.SetBool("IsMoving", false);
             if (criminalAnimator.gameObject.activeInHierarchy) criminalAnimator.SetBool("IsMoving", false);
+            if (NoGlassAnimator.gameObject.activeInHierarchy) criminalAnimator.SetBool("IsMoving", false);
             
             return; 
         }
@@ -49,6 +51,12 @@ public class PlayerController : MonoBehaviour
         {
             criminalAnimator.SetBool("IsMoving", IsMoving);
         }
+        
+        // Criminal aktifse onun animasyonunu yönet
+        if (NoGlassAnimator.gameObject.activeInHierarchy)
+        {
+            NoGlassAnimator.SetBool("IsMoving", IsMoving);
+        }
     
         // 4. YÖN DÖNDÜRME
         if (moveInput > 0) 
@@ -56,12 +64,14 @@ public class PlayerController : MonoBehaviour
             // Sağa bak
             if (animator.gameObject.activeInHierarchy) animator.transform.localScale = Vector3.one;
             if (criminalAnimator.gameObject.activeInHierarchy) criminalAnimator.transform.localScale = Vector3.one;
+            if (NoGlassAnimator.gameObject.activeInHierarchy) criminalAnimator.transform.localScale = Vector3.one;
         }
         else if (moveInput < 0) 
         {
             // Sola bak
             if (animator.gameObject.activeInHierarchy) animator.transform.localScale = new Vector3(-1, 1, 1);
             if (criminalAnimator.gameObject.activeInHierarchy) criminalAnimator.transform.localScale = new Vector3(-1, 1, 1);
+            if (NoGlassAnimator.gameObject.activeInHierarchy) criminalAnimator.transform.localScale = new Vector3(-1, 1, 1);
         }
     }
     
@@ -102,6 +112,7 @@ public class PlayerController : MonoBehaviour
         // Sadece aktif olan animatörü yürüt
         if (animator.gameObject.activeInHierarchy) animator.SetBool("IsMoving", true);
         if (criminalAnimator.gameObject.activeInHierarchy) criminalAnimator.SetBool("IsMoving", true);
+        if (NoGlassAnimator.gameObject.activeInHierarchy) criminalAnimator.SetBool("IsMoving", true);
     
         while (timer < duration)
         {
@@ -113,6 +124,7 @@ public class PlayerController : MonoBehaviour
         // Süre bitince yine sadece aktif olanı durdur
         if (animator.gameObject.activeInHierarchy) animator.SetBool("IsMoving", false);
         if (criminalAnimator.gameObject.activeInHierarchy) criminalAnimator.SetBool("IsMoving", false);
+        if (NoGlassAnimator.gameObject.activeInHierarchy) criminalAnimator.SetBool("IsMoving", false);
         isCinematicMode  = false;
         this.rb.simulated = true;
     }

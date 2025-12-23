@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce03b61ed0254ff78274a72ed36073fc, type: 3}
+  m_Name: 03_Phone_Ring
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueData
+  textFile: {fileID: 4900000, guid: 621207058ad689b40a84e159a6f62e6b, type: 3}
+  conversation:
+  - speakerName: Police Officer
+    sentence: "G\xFCnayd\u0131n dedektif. D\xFCn gece metroda bir cinayet i\u015Flenmi\u015F\u2026"
+  - speakerName: Police Officer
+    sentence: Olay yerinde seni bekliyoruz.
+  - speakerName: Dedektif
+    sentence: "Tamamd\u0131r, birazdan orday\u0131m."

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce03b61ed0254ff78274a72ed36073fc, type: 3}
+  m_Name: 20_Third_Morning_2
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueData
+  textFile: {fileID: 4900000, guid: cfe04dc32b907434c80023664dc00f62, type: 3}
+  conversation:
+  - speakerName: Police Officer
+    sentence: "G\xFCnayd\u0131n dedektif. Gece yine bir cinayet i\u015Flenmi\u015F\u2026"
+  - speakerName: Police Officer
+    sentence: "Seninle s\xFCrekli gitti\u011Fimiz bar\u0131n arkas\u0131ndaki ara
+      sokakta. Bir evsiz \xF6ld\xFCr\xFClm\xFC\u015F\u2026"
+  - speakerName: Police Officer
+    sentence: "Olay yerine h\u0131zl\u0131 gel, lanet olas\u0131ca \u015Fimdiden
+      kokmaya ba\u015Flam\u0131\u015F."

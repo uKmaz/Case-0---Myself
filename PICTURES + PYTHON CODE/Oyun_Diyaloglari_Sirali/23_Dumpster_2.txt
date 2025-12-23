@@ -1,0 +1,7 @@
+Asistan:Dedektif!
+Dedektif:Noldu?
+Asistan:Bu gözlük sizin değil mi?
+Dedektif:E-evet.
+Asistan:…
+Polis:…
+Polis:KALDIR KOLLARINI.!

@@ -1,0 +1,9 @@
+Kuyumcu:Ah dedektif iyi ki geldin.
+Dedektif:Selamlar.
+Asistan:Günaydın dedektif. Hemen neler olduğunu anlatayım.
+Dedektif:Dinliyorum.
+Asistan:Dün gece yarısı bir hırsız gelip vitrinden birkaç mücevher ve çok değerli bir kolyeyi çalmış… 
+Asistan:Alarm çalmaya başlayınca da kimseye yakalanmadan hızla olay yerinden ayrılmış.
+Dedektif:Kamera kayıtlarını incelediniz mi?
+Asistan:Evet, kar maskeli bir erkek. Zayıf ve fazla uzun sayılmaz… Önceki cinayetteki şüpheliyle benziyorlar.
+Asistan:Herhangi bir delil için incelemeye devam ediyoruz.

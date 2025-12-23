@@ -1,0 +1,3 @@
+Police Officer:Günaydın dedektif. Dün gece metroda bir cinayet işlenmiş…
+Police Officer:Olay yerinde seni bekliyoruz.
+Dedektif:Tamamdır, birazdan ordayım.

@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce03b61ed0254ff78274a72ed36073fc, type: 3}
+  m_Name: 08_Metro_Morning_Talk
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueData
+  textFile: {fileID: 4900000, guid: d050080a26014b2438b6017f1a12b7a7, type: 3}
+  conversation:
+  - speakerName: Asistan
+    sentence: "G\xFCnayd\u0131n dedektif."
+  - speakerName: Dedektif
+    sentence: "G\xFCnayd\u0131n. Neler olmu\u015F anlat hemen."
+  - speakerName: Asistan
+    sentence: "Kurban 35 ya\u015F\u0131nda, erkek. D\xFCn gece i\u015F arkada\u015Flar\u0131yla
+      bir \u015Feyler i\xE7mi\u015F\u2026"
+  - speakerName: Asistan
+    sentence: "Evine d\xF6nmek i\xE7in metro bekledi\u011Fi s\u0131rada katilimiz
+      gelmi\u015F\u2026"
+  - speakerName: Asistan
+    sentence: "Olay gece yar\u0131s\u0131 ger\xE7ekle\u015Fmi\u015F. Katilimiz adam\u0131
+      \xF6ld\xFCrmek i\xE7in \xF6zellikle son metroyu beklemi\u015F."
+  - speakerName: Dedektif
+    sentence: "Tamamd\u0131r Umut. Te\u015Fekk\xFCrler, bundan sonras\u0131nda ben
+      devam ederim."

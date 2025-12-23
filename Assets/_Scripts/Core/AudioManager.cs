@@ -172,4 +172,14 @@ public class AudioManager : MonoBehaviour
         }
         musicSource.Stop();
     }
+    public void PlayClip(AudioClip clip, float volume = 1f)
+    {
+        if (clip == null) return;
+
+        // Hafif pitch değişimi (Robotikliği kırmak için)
+        sfxSource.pitch = 1f + Random.Range(-0.05f, 0.05f);
+        
+        // Sesi patlat
+        sfxSource.PlayOneShot(clip, volume);
+    }
 }

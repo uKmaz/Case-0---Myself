@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce03b61ed0254ff78274a72ed36073fc, type: 3}
+  m_Name: 12_Living_Room
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueData
+  textFile: {fileID: 4900000, guid: 4ac64bab786847d49a23abe229a209e6, type: 3}
+  conversation:
+  - speakerName: Dedektif
+    sentence: Bu kolye nerden geldi buraya?
+  - speakerName: Dedektif
+    sentence: "Annem b\u0131rakm\u0131\u015F olmal\u0131. Hafta sonu geldi\u011Finde
+      unutmu\u015F galiba."

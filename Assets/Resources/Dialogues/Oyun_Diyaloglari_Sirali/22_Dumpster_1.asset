@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce03b61ed0254ff78274a72ed36073fc, type: 3}
+  m_Name: 22_Dumpster_1
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueData
+  textFile: {fileID: 4900000, guid: af32980e5ebb2f043b11da566f573cf5, type: 3}
+  conversation:
+  - speakerName: Polis
+    sentence: NERDE KALDIN!? Sabahtan beri seni bekliyoruz.
+  - speakerName: Dedektif
+    sentence: "Yar\u0131 k\xF6r bir \u015Fekilde yol bulmak kolay olmuyor ihtiyar."
+  - speakerName: Dedektif
+    sentence: Anlat Umut, neler oldu?
+  - speakerName: Asistan
+    sentence: "Kamera kay\u0131tlar\u0131n\u0131 izledi\u011Fimizde yine ayn\u0131
+      kar maskeli adam\u0131 g\xF6rd\xFCk. Son \xFC\xE7 g\xFCnd\xFCr pe\u015F pe\u015Fe
+      su\xE7 i\u015Fliyor."
+  - speakerName: Polis
+    sentence: "Arkas\u0131nda kamera kay\u0131tlar\u0131 d\u0131\u015F\u0131nda hi\xE7bir
+      iz b\u0131rakmadan hepsinden s\u0131yr\u0131ld\u0131."
+  - speakerName: Polis
+    sentence: "Bi elime ge\xE7irirsem-"
